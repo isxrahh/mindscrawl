@@ -60,7 +60,7 @@ export default function Newsletter() {
                     style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                     className="relative rounded-xl bg-zinc-950 p-12 md:p-24 border border-white/10 shadow-2xl transition-colors duration-500"
                 >
-                    <div className="absolute inset-0 overflow-hidden rounded-[3.5rem] pointer-events-none">
+                    <div className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
                         <div className="absolute -top-1/2 -left-1/4 w-full h-full bg-purple-500/10 blur-[120px] rounded-full animate-pulse" />
                         <div className="absolute -bottom-1/2 -right-1/4 w-full h-full bg-blue-500/10 blur-[120px] rounded-full animate-pulse [animation-delay:2s]" />
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -105,7 +105,7 @@ export default function Newsletter() {
                                 <Input
                                     type="email"
                                     placeholder="name@email.com"
-                                    className="border-none bg-transparent focus-visible:ring-0 text-white h-14 pl-6 text-lg placeholder:text-zinc-600"
+                                    className="border-none bg-transparent dark:bg-transparent focus-visible:ring-0 text-white h-14 pl-6 text-lg placeholder:text-zinc-600"
                                     required
                                 />
                                 <Button

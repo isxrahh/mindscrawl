@@ -575,9 +575,11 @@ function RatingItem(props: RatingItemProps) {
   const isTabStop = focusContext.tabStopId === itemId;
 
   const displayValue = hoveredValue ?? value;
-  const isFilled = displayValue >= itemValue;
+    const isFilled = displayValue >= itemValue;
   const isPartiallyFilled =
     step < 1 && displayValue >= itemValue - step && displayValue < itemValue;
+    const isAriaChecked =
+           value === itemValue || (step < 1 && value === itemValue - step);
   const isHovered = hoveredValue !== null && hoveredValue < itemValue;
 
   const isMouseClickRef = React.useRef(false);
@@ -885,7 +887,7 @@ function RatingItem(props: RatingItemProps) {
       role="radio"
       type="button"
       id={itemId}
-      aria-checked={isFilled}
+      aria-checked={isAriaChecked}
       aria-posinset={itemValue}
       aria-setsize={context.max}
       data-disabled={isDisabled ? "" : undefined}

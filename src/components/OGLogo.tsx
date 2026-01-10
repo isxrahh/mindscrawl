@@ -6,9 +6,9 @@ export function OrbitLogo({ className }: { className?: string }) {
         <div className={`flex flex-col items-center justify-center ${className || ""}`}>
             {/* Glowing blue-dotted "MindScrawl" logo - EldoraUI style */}
             <svg
-                width="280"
+                width="420"
                 height="50"
-                viewBox="0 0 280 50"
+                viewBox="0 0 420 50"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="drop-shadow-2xl"
