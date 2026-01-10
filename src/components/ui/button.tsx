@@ -36,6 +36,17 @@ const buttonVariants = cva(
   }
 )
 
+/**
+ * Polymorphic Button component that applies visual variants and sizes and can render as a Radix Slot or a native button.
+ *
+ * Renders a styled button (or the provided `asChild` component) with `data-slot`, `data-variant`, and `data-size` attributes and class names derived from `buttonVariants`.
+ *
+ * @param className - Additional CSS classes to merge with the component's computed classes
+ * @param variant - Visual variant to apply (e.g., "default", "destructive", "outline", "secondary", "ghost", "link")
+ * @param size - Size variant to apply (e.g., "default", "sm", "lg", "icon", "icon-sm", "icon-lg")
+ * @param asChild - If true, render a Radix `Slot` so consumers can pass a custom element; otherwise render a native `button`
+ * @returns A React element representing the styled button (or the provided `Slot` child) with the chosen variant and size
+ */
 function Button({
   className,
   variant = "default",

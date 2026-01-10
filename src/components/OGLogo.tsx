@@ -1,6 +1,12 @@
 // src/components/ui/OrbitLogo.tsx
 import React from "react";
 
+/**
+ * Renders the "MindScrawl" SVG logo with decorative blue orbit dots and an optional container class.
+ *
+ * @param className - Optional additional CSS classes to apply to the outer container
+ * @returns The React element for the OrbitLogo component
+ */
 export function OrbitLogo({ className }: { className?: string }) {
     return (
         <div className={`flex flex-col items-center justify-center ${className || ""}`}>

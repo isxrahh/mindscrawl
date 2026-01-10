@@ -12,6 +12,13 @@ import { cn } from '@/lib/utils';
 
 type AvatarGroupProps = AvatarGroupPropsPrimitive;
 
+/**
+ * Render a styled avatar group wrapper that composes default sizing and overlap behavior.
+ *
+ * @param className - Additional CSS class names to apply to the avatar group container
+ * @param invertOverlap - When `true`, invert the overlap direction of avatars; defaults to `true`
+ * @returns The composed AvatarGroupPrimitive element with provided props and classes applied
+ */
 function AvatarGroup({
   className,
   invertOverlap = true,
@@ -34,6 +41,14 @@ type AvatarGroupTooltipProps = Omit<
   layout?: boolean | 'position' | 'size' | 'preserve-aspect';
 };
 
+/**
+ * Render a styled tooltip for an avatar group that contains layout-controlled content and an arrow.
+ *
+ * @param className - Additional CSS class names applied to the tooltip container
+ * @param children - Content to display inside the tooltip
+ * @param layout - Controls the `motion.div` layout behaviour (`false`, `true`, `'position'`, `'size'`, or `'preserve-aspect'`); defaults to `'preserve-aspect'`
+ * @returns The tooltip element containing the provided children and an arrow
+ */
 function AvatarGroupTooltip({
   className,
   children,

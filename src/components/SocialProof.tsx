@@ -18,6 +18,15 @@ const itemVariants = {
     visible: { y: 0, opacity: 0.4 } // Settles at 40% opacity as defined before
 };
 
+/**
+ * Renders a centered social proof bar with avatars, a rating, a commit icon, and company logos.
+ *
+ * The component displays a subtle scale-up avatar group, a five-star rating with a numeric score
+ * and caption, a vertical commit icon, and a staggered, hover-scalable row of company logos.
+ * Animations include avatar scale-in, rating slide-in, and staggered fade-and-rise for logos.
+ *
+ * @returns A JSX element containing the complete social proof UI block.
+ */
 export default function SocialProof() {
     return (
         <div className="flex items-center gap-8 flex-1 max-w-5xl justify-center my-12">

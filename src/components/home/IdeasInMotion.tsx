@@ -105,6 +105,13 @@ const Card = ({ item, index, setHoveredIndex }: any) => {
     );
 };
 
+/**
+ * Render the "Ideas in Motion" section containing three interactive 3D-tilt cards and a color-reactive particle background.
+ *
+ * The component mounts a canvas-based particle system that visually responds to card hover state (color, glow, and connection intensity) and manages per-card hover interactions and entrance animations.
+ *
+ * @returns A React element representing the section with cards and the animated particle background.
+ */
 export default function IdeasInMotion() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);

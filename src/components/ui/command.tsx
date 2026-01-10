@@ -13,6 +13,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 
+/**
+ * Renders the main command list container with default layout and styling.
+ *
+ * @param className - Additional CSS classes to append to the component's default styles
+ * @returns The CommandPrimitive element configured as the primary command list container with composed classes and forwarded props
+ */
 function Command({
   className,
   ...props
@@ -29,6 +35,17 @@ function Command({
   )
 }
 
+/**
+ * Render a dialog-wrapped command palette with an accessible, visually hidden header and a content area that hosts command items.
+ *
+ * @param title - Title text used for the dialog's accessible heading
+ * @param description - Descriptive text used for the dialog's accessible description
+ * @param children - Command components (items, groups, etc.) to render inside the palette
+ * @param className - Additional classes applied to the DialogContent wrapper
+ * @param showCloseButton - Whether the DialogContent should render a close button
+ * @param props - Additional props forwarded to the underlying Dialog component
+ * @returns A JSX element containing the dialog and its command palette content
+ */
 function CommandDialog({
   title = "Command Palette",
   description = "Search for a command to run...",
@@ -60,6 +77,12 @@ function CommandDialog({
   )
 }
 
+/**
+ * Renders the command palette's search input with a leading search icon.
+ *
+ * @param className - Additional CSS classes applied to the underlying input element
+ * @returns A JSX element containing a wrapped search icon and the command input element
+ */
 function CommandInput({
   className,
   ...props
@@ -82,6 +105,14 @@ function CommandInput({
   )
 }
 
+/**
+ * Renders the scrollable command list container for the Command palette.
+ *
+ * Applies default max-height and overflow styles, merges any provided `className`, and forwards all other props to the underlying cmdk List primitive.
+ *
+ * @param className - Additional CSS classes to apply to the list container
+ * @returns The rendered command list element
+ */
 function CommandList({
   className,
   ...props
@@ -98,6 +129,12 @@ function CommandList({
   )
 }
 
+/**
+ * Renders the empty-state placeholder for the command palette.
+ *
+ * @param props - Props forwarded to the underlying `CommandPrimitive.Empty` element
+ * @returns The rendered `CommandPrimitive.Empty` element
+ */
 function CommandEmpty({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
@@ -110,6 +147,12 @@ function CommandEmpty({
   )
 }
 
+/**
+ * Renders a grouped section within the command palette with default heading and padding styles.
+ *
+ * @param className - Additional class names appended to the default group styles.
+ * @returns A styled CmdK Group element representing a command list group.
+ */
 function CommandGroup({
   className,
   ...props
@@ -126,6 +169,11 @@ function CommandGroup({
   )
 }
 
+/**
+ * Renders a horizontal separator used between command groups and items.
+ *
+ * @returns A separator element for use within the Command palette.
+ */
 function CommandSeparator({
   className,
   ...props
@@ -139,6 +187,13 @@ function CommandSeparator({
   )
 }
 
+/**
+ * Renders a styled command palette item with default slot and selection/disabled styles.
+ *
+ * Applies `data-slot="command-item"` and a set of default classes for selection, disabled state, and icon layout, and forwards all received props to the underlying command item element.
+ *
+ * @returns The rendered command palette item element
+ */
 function CommandItem({
   className,
   ...props
@@ -155,6 +210,14 @@ function CommandItem({
   )
 }
 
+/**
+ * Renders a styled shortcut hint positioned at the end of a command item.
+ *
+ * Forwards native span props to the rendered element and accepts `className` to
+ * extend or override the default styling.
+ *
+ * @returns A span element displaying a right-aligned, muted shortcut hint.
+ */
 function CommandShortcut({
   className,
   ...props

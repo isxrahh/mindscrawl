@@ -18,6 +18,14 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import HeroSection from "@/components/home/HeroSection";
 import IdeasInMotion from "@/components/home/IdeasInMotion";
 
+/**
+ * Render the landing page composed of sequential site sections and a scroll-linked AI visual effect.
+ *
+ * Includes a sticky AI-effect section that maps the container's scroll progress to animated path lengths
+ * passed into the GoogleGeminiEffect component.
+ *
+ * @returns The root JSX element rendering the full landing page layout.
+ */
 export default function LandingPage() {
     const ref = useRef(null);
     const {scrollYProgress} = useScroll({
@@ -96,4 +104,3 @@ export default function LandingPage() {
         </main>
     );
 }
-

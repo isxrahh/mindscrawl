@@ -18,6 +18,12 @@ export const metadata: Metadata = {
 };
 
 
+/**
+ * Root layout component that renders the HTML document structure and provides theming for the app.
+ *
+ * @param children - The application content to render inside the layout.
+ * @returns The root HTML element (with language and body font) that wraps `children` with a ThemeProvider configured for system theme handling.
+ */
 export default function RootLayout({
                                        children,
                                    }: {

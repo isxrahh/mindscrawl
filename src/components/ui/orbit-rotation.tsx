@@ -60,6 +60,19 @@ const defaultCenterIcon: OrbitIcon = {
   name: "React",
 }
 
+/**
+ * Render a central icon surrounded by animated concentric orbits of icons.
+ *
+ * Each orbit is a dotted circular ring that rotates; icons are distributed evenly around each ring.
+ *
+ * @param icons - Array of icons to place in the orbits; defaults to a predefined icon set.
+ * @param orbitCount - Number of concentric orbits to render.
+ * @param orbitGap - Additional gap between orbits, expressed in rem units.
+ * @param centerIcon - Icon displayed at the center of the orbits.
+ * @param size - Size preset for container and icons (`"sm"`, `"md"`, or `"lg"`).
+ * @param className - Optional additional class names applied to the outer container.
+ * @returns A React element containing the animated orbital icon layout.
+ */
 export function OrbitRotation({
   icons = defaultIcons,
   orbitCount = 3,
