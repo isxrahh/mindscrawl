@@ -10,6 +10,17 @@ import {
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Render a customizable button with an animated, SVG-driven moving border.
+ *
+ * @param borderRadius - CSS border-radius applied to the button container (default: "1.75rem")
+ * @param as - Element or component to render as the root (e.g., "button", "a", or a custom component)
+ * @param containerClassName - Additional class names applied to the outer container wrapper
+ * @param borderClassName - Class names applied to the decorative animated element inside the moving border
+ * @param duration - Animation loop duration in milliseconds for the moving border (defaults to the MovingBorder's default when omitted)
+ * @param className - Class names applied to the button face (content layer)
+ * @returns A React element that displays the button with its animated border and centered children
+ */
 export function Button({
   borderRadius = "1.75rem",
   children,

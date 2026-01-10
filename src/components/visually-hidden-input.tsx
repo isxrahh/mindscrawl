@@ -15,6 +15,20 @@ interface VisuallyHiddenInputProps<T = InputValue>
   bubbles?: boolean;
 }
 
+/**
+ * Renders an input element that is visually hidden but mirrors the value or checked state of a provided control element.
+ *
+ * The hidden input synchronizes its `value` (or `checked` for checkbox/radio/switch types) with the props, dispatching the corresponding `input` or `click` event so external listeners observe updates. When a `control` element is provided, the hidden input matches the control's measured width and height and updates those dimensions via ResizeObserver. The `bubbles` prop controls whether the dispatched synchronization event bubbles (defaults to `true`).
+ *
+ * @param props - Component props including:
+ *   - `control`: an optional HTMLElement whose size the hidden input should mirror
+ *   - `value`: value to synchronize for non-check inputs
+ *   - `checked`: checked state to synchronize for checkbox/radio/switch inputs
+ *   - `bubbles`: whether the dispatched synchronization event should bubble (default `true`)
+ *   - `type`: input `type` (default `"hidden"`)
+ *   - `style`: additional inline styles to apply to the hidden input
+ * @returns The rendered hidden input element that mirrors the provided control's state and size.
+ */
 function VisuallyHiddenInput<T = InputValue>(
   props: VisuallyHiddenInputProps<T>,
 ) {

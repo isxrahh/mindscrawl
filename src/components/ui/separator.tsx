@@ -5,6 +5,14 @@ import * as SeparatorPrimitive from "@radix-ui/react-separator"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Render a themed separator element for dividing content.
+ *
+ * @param className - Additional CSS class names to apply to the separator
+ * @param orientation - Direction of the separator; `"horizontal"` or `"vertical"`. Default: `"horizontal"`
+ * @param decorative - Whether the separator is decorative and should be hidden from assistive technologies. Default: `true`
+ * @returns The rendered separator element
+ */
 function Separator({
   className,
   orientation = "horizontal",

@@ -28,10 +28,24 @@ const ITEM_NAME = "RatingItem";
 const ENTRY_FOCUS = "ratingFocusGroup.onEntryFocus";
 const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
+/**
+ * Create a stable DOM id for a rating item by combining the rating root id and the item's value.
+ *
+ * @param id - The root id of the rating component
+ * @param value - The numeric value of the item (1-based)
+ * @returns A string identifier in the form `{rootId}-item-{value}`
+ */
 function getItemId(id: string, value: number) {
   return `${id}-item-${value}`;
 }
 
+/**
+ * Produce a stable ID string for a partial-fill gradient scoped to a rating instance and step.
+ *
+ * @param id - The root identifier for the rating instance used to scope the gradient
+ * @param step - The step value (for example `0.5` or `1`) indicating partial or full fill
+ * @returns The generated gradient id string combining the `id` and `step`
+ */
 function getPartialFillGradientId(id: string, step: Step) {
   return `partial-fill-gradient-${id}-${step}`;
 }
@@ -45,6 +59,13 @@ const MAP_KEY_TO_FOCUS_INTENT: Record<string, FocusIntent> = {
   End: "last",
 };
 
+/**
+ * Return a keyboard key adjusted for right-to-left direction.
+ *
+ * @param key - The original keyboard key (e.g., "ArrowLeft", "ArrowRight")
+ * @param dir - Text direction; when `"rtl"`, left and right arrow keys are swapped
+ * @returns The input `key`, with `"ArrowLeft"` and `"ArrowRight"` swapped when `dir` is `"rtl"`
+ */
 function getDirectionAwareKey(key: string, dir?: Direction) {
   if (dir !== "rtl") return key;
   return key === "ArrowLeft"
@@ -54,6 +75,14 @@ function getDirectionAwareKey(key: string, dir?: Direction) {
       : key;
 }
 
+/**
+ * Determine the focus navigation intent represented by a keyboard event.
+ *
+ * @param event - The keyboard event from an item; the event's `key` is used to infer intent.
+ * @param dir - Text direction (`"ltr"` or `"rtl"`); left/right arrows are swapped when `"rtl"`.
+ * @param orientation - Layout orientation (`"horizontal"` or `"vertical"`); arrows perpendicular to the orientation are ignored.
+ * @returns The focus intent as `"prev" | "next" | "first" | "last"`, or `undefined` if the key does not map to a navigation intent or is inapplicable for the given orientation.
+ */
 function getFocusIntent(
   event: React.KeyboardEvent<ItemElement>,
   dir?: Direction,
@@ -67,6 +96,16 @@ function getFocusIntent(
   return MAP_KEY_TO_FOCUS_INTENT[key];
 }
 
+/**
+ * Focuses the first candidate element that successfully receives focus, in order.
+ *
+ * Tries each ref in `candidates` sequentially and calls `.focus()` on the first truthy element
+ * that changes document.activeElement. If a candidate equals the element that was focused when
+ * this function was called, the search stops immediately without changing focus.
+ *
+ * @param candidates - Ordered array of element refs to attempt to focus.
+ * @param preventScroll - When true, focus is applied without causing scroll.
+ */
 function focusFirst(
   candidates: React.RefObject<ItemElement | null>[],
   preventScroll = false,
@@ -95,6 +134,13 @@ interface Store {
 
 const StoreContext = React.createContext<Store | null>(null);
 
+/**
+ * Accesses the rating store instance from context for a consumer component.
+ *
+ * @param consumerName - The consumer component's name used in the thrown error message when the store is missing
+ * @returns The shared `Store` instance from `StoreContext`
+ * @throws Error if called outside the Rating root (when the store context is not provided)
+ */
 function useStoreContext(consumerName: string) {
   const context = React.useContext(StoreContext);
   if (!context) {
@@ -103,6 +149,14 @@ function useStoreContext(consumerName: string) {
   return context;
 }
 
+/**
+ * Subscribes to the rating store and returns derived state selected by `selector`.
+ *
+ * @param selector - Function that derives the piece of state to read from the store
+ * @param ogStore - Optional explicit store to use instead of the context-provided store
+ * @returns The value produced by `selector` from the current store state
+ * @throws Error if no store is available (hook used outside the Rating root)
+ */
 function useStore<T>(
   selector: (state: StoreState) => T,
   ogStore?: Store | null,
@@ -146,6 +200,13 @@ interface RatingContextValue {
 
 const RatingContext = React.createContext<RatingContextValue | null>(null);
 
+/**
+ * Retrieves the current rating context for a consumer and ensures it is used within the Rating root.
+ *
+ * @param consumerName - The name of the consuming component used in the error message when no context is present
+ * @returns The current `RatingContextValue` provided by `RatingContext`
+ * @throws Error if no `RatingContext` provider is present (includes `consumerName` and `ROOT_NAME` in the message)
+ */
 function useRatingContext(consumerName: string) {
   const context = React.useContext(RatingContext);
   if (!context) {
@@ -167,6 +228,13 @@ interface FocusContextValue {
 
 const FocusContext = React.createContext<FocusContextValue | null>(null);
 
+/**
+ * Retrieves the FocusContext value for a consumer.
+ *
+ * @param consumerName - The consumer's display name used in the thrown error message when the hook is used outside of `FocusProvider`.
+ * @returns The `FocusContextValue` provided by `FocusProvider`.
+ * @throws Error if the hook is called outside of a `FocusProvider`. The error message includes `consumerName`.
+ */
 function useFocusContext(consumerName: string) {
   const context = React.useContext(FocusContext);
   if (!context) {
@@ -196,6 +264,14 @@ interface RatingProps extends React.ComponentProps<"div"> {
   name?: string;
 }
 
+/**
+ * Render a configurable, accessible rating widget that supports keyboard and pointer interactions, partial fills, direction/orientation awareness, and optional form integration.
+ *
+ * The component accepts controlled or uncontrolled usage via `value` / `defaultValue`, supports half-step or whole-step increments (`step`), optional clearing of the value (`clearable`), automatic or manual activation (`activationMode`), RTL direction, horizontal/vertical orientation, disabling and read-only modes, and exposes change/hover callbacks.
+ *
+ * @param props - Component props (see `RatingProps`) including key options like `value`/`defaultValue`, `onValueChange`, `onHover`, `max`, `step`, `clearable`, `activationMode`, `dir`, `orientation`, `size`, `disabled`, `readOnly`, `required`, and `name`.
+ * @returns A React element rendering the rating control.
+ */
 function Rating(props: RatingProps) {
   const {
     value: valueProp,
@@ -527,6 +603,11 @@ interface RatingItemProps
   children?: React.ReactNode | ((dataState: DataState) => React.ReactNode);
 }
 
+/**
+ * Render a single rating item: a radio-like interactive control that supports full and partial fills, hover previews, keyboard and mouse interaction, focus management, and direction/orientation-aware behavior.
+ *
+ * @returns A React element representing the rating item control with appropriate ARIA attributes and interaction handlers.
+ */
 function RatingItem(props: RatingItemProps) {
   const {
     index,

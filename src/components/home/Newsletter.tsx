@@ -5,6 +5,13 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Renders a newsletter signup section that includes a 3D-tilt promotional card which responds to pointer movement.
+ *
+ * The card tilts based on the pointer position over it (smoothed with spring motion) and resets to flat when the pointer leaves. The section contains heading, descriptive text, an email input with a call-to-action button, and decorative layered visuals.
+ *
+ * @returns The rendered newsletter section as a JSX element.
+ */
 export default function Newsletter() {
     const containerRef = useRef<HTMLDivElement>(null);
 

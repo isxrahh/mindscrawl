@@ -20,6 +20,12 @@ type SlotProps<T extends HTMLElement = HTMLElement> = {
   children?: any;
 } & DOMMotionProps<T>;
 
+/**
+ * Creates a single callback ref that assigns the given element to multiple refs.
+ *
+ * @param refs - One or more refs (callback refs or ref objects) to update when the returned callback is invoked.
+ * @returns A ref callback that sets the received node on each provided ref (`call` for function refs, `current` for ref objects).
+ */
 function mergeRefs<T>(
   ...refs: (React.Ref<T> | undefined)[]
 ): React.RefCallback<T> {
@@ -35,6 +41,13 @@ function mergeRefs<T>(
   };
 }
 
+/**
+ * Merge a child element's props with slot props, concatenating `className` and shallow-merging `style`.
+ *
+ * @param childProps - Props provided by the child element; preserved unless overridden by `slotProps`.
+ * @param slotProps - Props provided by the slot; for conflicting keys, values from `slotProps` take precedence. `className` values are concatenated and `style` objects are shallow-merged with `slotProps` overriding overlapping keys.
+ * @returns An object containing the combined props ready to be spread onto the rendered element.
+ */
 function mergeProps<T extends HTMLElement>(
   childProps: AnyProps,
   slotProps: DOMMotionProps<T>,
@@ -58,6 +71,15 @@ function mergeProps<T extends HTMLElement>(
   return merged;
 }
 
+/**
+ * Wraps a single React element child with motion capabilities, merging the child's props and ref with the Slot's props and ref.
+ *
+ * The child must be a single valid React element. If the child is already a motion component it is used directly; otherwise it is wrapped to provide motion behavior. Child and slot `className` and `style` are merged and both refs are combined.
+ *
+ * @param children - A single React element to render inside the Slot.
+ * @param ref - An optional ref passed to the resulting element; it is merged with the child's existing ref.
+ * @returns The motion-enabled element with merged props and a combined ref, or `null` if `children` is not a valid React element.
+ */
 function Slot<T extends HTMLElement = HTMLElement>({
   children,
   ref,

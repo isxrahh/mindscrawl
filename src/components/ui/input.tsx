@@ -2,6 +2,15 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a themed input element with the component's default styling while accepting all native input props.
+ *
+ * The provided `className` is appended to the component's base classes. Any additional props are spread onto the underlying `<input>`.
+ *
+ * @param className - Additional CSS classes to append to the component's base classes
+ * @param type - HTML input `type` attribute (e.g., "text", "password")
+ * @returns The rendered input element
+ */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

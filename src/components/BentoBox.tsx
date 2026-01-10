@@ -63,6 +63,13 @@ const BentoGridItemWrapper = ({
         {header}
     </motion.div>
 );
+/**
+ * Renders a responsive, animated grid of feature cards using predefined skeleton headers.
+ *
+ * Maps the internal `items` array to `BentoGridItemWrapper` components and places them inside a centered `BentoGrid` with layout and spacing constraints.
+ *
+ * @returns A JSX element containing the responsive `BentoGrid` populated with feature cards.
+ */
 export default function BentoBox() {
     return (
         <BentoGrid className="max-w-7xl mx-auto md:min-h-[32rem] lg:min-h-[38rem] gap-8 py-12">

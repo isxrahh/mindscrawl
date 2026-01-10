@@ -2,6 +2,11 @@ import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768
 
+/**
+ * React hook that tracks whether the viewport width is less than MOBILE_BREAKPOINT and updates when the viewport changes.
+ *
+ * @returns `true` if the current viewport width is less than MOBILE_BREAKPOINT, `false` otherwise.
+ */
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 

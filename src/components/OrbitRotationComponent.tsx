@@ -23,6 +23,13 @@ import {
 import { OrbitLogo } from "@/components/OGLogo"
 import {OrbitRotation} from "@/components/ui/orbit-rotation";
 
+/**
+ * Displays a centered OrbitRotation demo with technology icons orbiting a central brand logo.
+ *
+ * The component renders a full-width container with a fixed height of 500px that centers an OrbitRotation configured with three orbits, an orbit gap of 7, a medium size, a set of technology icons, and the MindScrawl center logo.
+ *
+ * @returns A React element containing the OrbitRotation demo layout.
+ */
 export function OrbitRotationDemo() {
     const techIcons = [
         { Icon: FaReact, name: "React" },

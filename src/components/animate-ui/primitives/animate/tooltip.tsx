@@ -69,6 +69,12 @@ const [LocalTooltipProvider, useTooltip] = getStrictContext<TooltipContextType>(
 
 type TooltipPosition = { x: number; y: number };
 
+/**
+ * Extracts the primary side from a placement token (e.g. `"top-start"` -> `"top"`).
+ *
+ * @param placement - A side or a side-alignment string (like `"top"`, `"bottom-end"`)
+ * @returns The primary `Side` (`"top" | "bottom" | "left" | "right"`) extracted from `placement`
+ */
 function getResolvedSide(placement: Side | `${Side}-${Align}`) {
   if (placement.includes('-')) {
     return placement.split('-')[0] as Side;
@@ -76,6 +82,12 @@ function getResolvedSide(placement: Side | `${Side}-${Align}`) {
   return placement as Side;
 }
 
+/**
+ * Provides the initial positional offset used for enter animations based on the tooltip side.
+ *
+ * @param side - The side from which the tooltip appears ('top', 'bottom', 'left', or 'right').
+ * @returns An object with either an `x` or `y` numeric offset (in pixels) representing the starting translation for the animation.
+ */
 function initialFromSide(side: Side): Partial<Record<'x' | 'y', number>> {
   if (side === 'top') return { y: 15 };
   if (side === 'bottom') return { y: -15 };
@@ -91,6 +103,20 @@ type TooltipProviderProps = {
   transition?: Transition;
 };
 
+/**
+ * Provides global tooltip coordination and renders the shared tooltip overlay.
+ *
+ * The provider manages global tooltip state (current tooltip, open/close timing, and reference element),
+ * wires up global listeners (Escape, scroll, resize) to dismiss tooltips, and renders the TooltipOverlay
+ * alongside its children.
+ *
+ * @param children - The component subtree that should have access to the global tooltip context.
+ * @param id - Optional stable id to namespace tooltip instances; if omitted a generated id is used.
+ * @param openDelay - Milliseconds to wait before showing a tooltip after a trigger (default: 700).
+ * @param closeDelay - Milliseconds to wait before hiding a tooltip after dismissal (default: 300).
+ * @param transition - Motion transition configuration applied to tooltip animations.
+ * @returns A React element providing global tooltip context and rendering the tooltip overlay.
+ */
 function TooltipProvider({
   children,
   id,
@@ -199,6 +225,13 @@ type TooltipArrowProps = Omit<
   withTransition?: boolean;
 };
 
+/**
+ * Renders the tooltip arrow oriented to the current tooltip side and alignment, optionally animated with the global transition.
+ *
+ * @param ref - Forwarded ref that resolves to the arrow SVG element.
+ * @param withTransition - When true, applies the global motion transition and shared layoutId to the arrow; when false, renders the arrow without the shared transition.
+ * @returns The motion-enabled SVG arrow element configured for the active tooltip. 
+ */
 function TooltipArrow({
   ref,
   withTransition = true,
@@ -229,10 +262,27 @@ function TooltipArrow({
 
 type TooltipPortalProps = React.ComponentProps<typeof FloatingPortal>;
 
+/**
+ * Renders children into a Floating UI portal for tooltip content.
+ *
+ * Forwards all received props to `FloatingPortal`.
+ *
+ * @param props - Props forwarded to the underlying `FloatingPortal`, including children to render into the portal.
+ * @returns The `FloatingPortal` element containing the provided children.
+ */
 function TooltipPortal(props: TooltipPortalProps) {
   return <FloatingPortal {...props} />;
 }
 
+/**
+ * Renders the global tooltip overlay positioned and animated relative to the active reference element.
+ *
+ * Reads the global tooltip state to decide when and what to render, uses Floating UI to compute placement
+ * and arrow positioning, and applies motion animations for enter/exit transitions. Cleans up rendered state
+ * after the close animation completes.
+ *
+ * @returns The tooltip overlay element when a tooltip is active and positioned, `null` otherwise.
+ */
 function TooltipOverlay() {
   const { currentTooltip, transition, globalId, referenceElRef } =
     useGlobalTooltip();
@@ -359,6 +409,16 @@ type TooltipProps = {
   alignOffset?: number;
 };
 
+/**
+ * Provides per-tooltip configuration and supplies a local tooltip context to its children.
+ *
+ * @param children - Elements that will receive the tooltip context (triggers, content, etc.).
+ * @param side - Preferred placement of the tooltip relative to its trigger: 'top', 'bottom', 'left', or 'right'.
+ * @param sideOffset - Distance in pixels to offset the tooltip along the main (side) axis.
+ * @param align - Alignment of the tooltip along the cross axis: 'start', 'center', or 'end'.
+ * @param alignOffset - Distance in pixels to offset the tooltip along the cross (alignment) axis.
+ * @returns A React element that provides local tooltip state (including a generated `id`) to its descendants.
+ */
 function Tooltip({
   children,
   side = 'top',
@@ -391,6 +451,13 @@ function Tooltip({
 
 type TooltipContentProps = WithAsChild<HTMLMotionProps<'div'>>;
 
+/**
+ * Compare two HTMLMotionProps<'div'> objects for shallow equality while ignoring the `children` property.
+ *
+ * @param a - First props object to compare (may be undefined)
+ * @param b - Second props object to compare (may be undefined)
+ * @returns `true` if `a` and `b` have the same own property values for all keys other than `children`, `false` otherwise.
+ */
 function shallowEqualWithoutChildren(
   a?: HTMLMotionProps<'div'>,
   b?: HTMLMotionProps<'div'>,
@@ -407,6 +474,15 @@ function shallowEqualWithoutChildren(
   return true;
 }
 
+/**
+ * Syncs provided motion props and rendering mode into the local tooltip context.
+ *
+ * Keeps the local tooltip's content props up to date and records whether the
+ * content should be rendered "as child" (slot) or as a wrapped element.
+ *
+ * @param asChild - If `true`, the tooltip content will be rendered via the caller as a child/slot.
+ * @param props - Motion/HTML props to apply to the tooltip content; updates are skipped when only `children` differ.
+ */
 function TooltipContent({ asChild = false, ...props }: TooltipContentProps) {
   const { setProps, setAsChild } = useTooltip();
   const lastPropsRef = React.useRef<HTMLMotionProps<'div'> | undefined>(
@@ -429,6 +505,13 @@ function TooltipContent({ asChild = false, ...props }: TooltipContentProps) {
 
 type TooltipTriggerProps = WithAsChild<HTMLMotionProps<'div'>>;
 
+/**
+ * Renders an interactive trigger element that opens the associated tooltip on hover or focus and closes it on pointer interactions, blur, or mouse leave.
+ *
+ * The trigger wires up event handlers to coordinate with the global tooltip controller: it sets the tooltip reference element, requests show/hide actions, and prevents immediate re-opening after certain pointer interactions.
+ *
+ * @returns The rendered trigger element for the tooltip.
+ */
 function TooltipTrigger({
   ref,
   onMouseEnter,
