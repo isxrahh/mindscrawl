@@ -28,21 +28,13 @@ const HeroSection = () => {
                 initial={{y: -100}}
                 animate={{y: 0}}
                 className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-md">
-                <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+                <div className="container mx-auto px-6 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <Image
-                            src="/assets/logo_light.png"
+                            src="/assets/logo.png"
                             width={350}
-                            height={150}
+                            height={100}
                             alt="MindScrawl Logo"
-                            className="block dark:hidden"
-                        />
-                        <Image
-                            src="/assets/logo_dark.png"
-                            width={350}
-                            height={150}
-                            alt="MindScrawl Logo"
-                            className="hidden dark:block"
                         />
                     </div>
                     <div className="flex gap-4">
@@ -86,7 +78,7 @@ const HeroSection = () => {
                         Build your second brain with
                         <span className="text-primary"> MindScrawl ⚡</span>
                         <br/>
-                        <span className="block mt-4 text-4xl md:text-5xl">
+                        <span className="block mt-4 text-4xl md:text-5xl font-semibold leading-tight">
                                 All-in-one workspace for
                                 <Typewriter
                                     options={{

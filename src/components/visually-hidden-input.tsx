@@ -43,14 +43,15 @@ function VisuallyHiddenInput<T = InputValue>(
         previous: isCheckInput ? checked : value,
     });
 
-    const prevValue = React.useMemo(() => {
-        const currentValue = isCheckInput ? checked : value;
+    const currentValue = isCheckInput ? checked : value;
+    const prevValue = prevValueRef.current.previous;
+
+    React.useEffect(() => {
         if (prevValueRef.current.value !== currentValue) {
             prevValueRef.current.previous = prevValueRef.current.value;
             prevValueRef.current.value = currentValue;
         }
-        return prevValueRef.current.previous;
-    }, [isCheckInput, value, checked]);
+    }, [currentValue]);
 
     const [controlSize, setControlSize] = React.useState<{
         width?: number;
@@ -151,7 +152,9 @@ function VisuallyHiddenInput<T = InputValue>(
             ref={inputRef}
             aria-hidden={isCheckInput}
             tabIndex={-1}
-            defaultChecked={isCheckInput ? checked : undefined}
+            checked={isCheckInput ? checked : undefined}
+            onChange={() => {
+            }}
             style={composedStyle}
         />
     );
