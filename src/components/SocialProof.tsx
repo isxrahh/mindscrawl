@@ -15,7 +15,7 @@ const containerVariants = {
 
 const itemVariants = {
     hidden: { y: 10, opacity: 0 },
-    visible: { y: 0, opacity: 0.4 } // Settles at 40% opacity as defined before
+    visible: { y: 0, opacity: 100 } // Settles at 40% opacity as defined before
 };
 
 export default function SocialProof() {
@@ -57,7 +57,13 @@ export default function SocialProof() {
                 </p>
             </motion.div>
 
-            <GitCommitVertical className="w-8 h-8 text-slate-300 shrink-0 font-light" />
+            <motion.div
+                initial={{opacity: 0, y: 20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{delay: 0.5}}
+                className="cursor-pointer flex items-center justify-center w-10 h-10 mx-8"
+            >  <GitCommitVertical className="w-12 h-12 text-slate-800 dark:text-white shrink-0" strokeWidth={1} />
+            </motion.div>
 
             {/* 3. Logos: Staggered "Fade & Rise" effect */}
             <motion.div
@@ -77,7 +83,7 @@ export default function SocialProof() {
                         >
                             <LogoIcon
                                 size={30}
-                                className="text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                                className="text-gray-900 dark:text-slate-100 hover:text-gray-800 transition-colors duration-200"
                             />
                         </motion.div>
                     );

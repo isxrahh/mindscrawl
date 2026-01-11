@@ -13,7 +13,17 @@ import {
 } from "lucide-react";
 import {IconType} from "react-icons";
 import {FaMeta} from "react-icons/fa6";
-import {FaApple, FaGoogle, FaAmazon, FaMicrosoft,} from "react-icons/fa";
+import {
+    FaApple,
+    FaGoogle,
+    FaAmazon,
+    FaMicrosoft,
+    FaTwitter,
+    FaGithub,
+    FaDiscord,
+    FaYoutube,
+    FaInstagram,
+} from "react-icons/fa";
 import {motion} from "framer-motion";
 import React from "react";
 
@@ -82,13 +92,39 @@ export interface milestones_data {
     suffix: string;
 }
 
-export interface timeline_data{
+export interface timeline_data {
     id: number;
     title: string;
     icon: LucideIcon;
     desc: string;
     date: string;
 }
+
+export interface footer_icons_data {
+    id: number;
+    icon: IconType;
+}
+
+export interface products_data {
+    id: number;
+    label: string;
+}
+
+export interface resources_data {
+    id: number;
+    label: string;
+}
+
+export interface company_data {
+    id: number;
+    label: string;
+}
+
+export interface brand_data {
+    id: number;
+    label: string;
+}
+
 
 export const features_name: Features[] = [
     {
@@ -330,69 +366,180 @@ export const MILESTONES: milestones_data[] = [
     {id: 4, icon: Star, value: 4.9, suffix: "★", label: "Average Rating"},
 ]
 
-export const TIMELINE:timeline_data[] = [
+export const TIMELINE: timeline_data[] = [
     {
 
-        id:1,
+        id: 1,
         date: "Jan 2025",
         title: "MindScrawl Launched",
         desc: "Debuted with a polished public beta featuring a beautiful note editor, bidirectional linking, offline-first sync, and full cross-platform support.",
 
-        icon: Rocket,        },
+        icon: Rocket,
+    },
     {
 
-        id:2,
+        id: 2,
         date: "Mar 2025",
         title: "Databases Added",
         desc: "Flexible views, relations, and powerful filtering",
 
-        icon:DatabaseZap,        },
+        icon: DatabaseZap,
+    },
     {
 
-       id:3,
+        id: 3,
         date: "Jun 2025",
         title: "AI Integration",
         desc: "Smart summarization, writing assistance & suggestions",
 
-        icon:AtomIcon,        },
+        icon: AtomIcon,
+    },
     {
 
-       id:4,
+        id: 4,
         date: "Oct 2025",
         title: "Templates Marketplace",
         desc: "Thousands of community-shared templates",
 
-        icon:LucideNewspaper,        },
+        icon: LucideNewspaper,
+    },
     {
 
-       id:5,
+        id: 5,
         date: "Jan 2026",
         title: "Today",
         desc: "10,000+ active creators building their second brain",
 
-        icon:LucideClock1,        },
+        icon: LucideClock1,
+    },
     {
 
-       id:6,
+        id: 6,
         date: "Q2 2026",
         title: "Mobile Apps",
         desc: "Native iOS & Android apps with offline sync",
 
-        icon:LucideMonitorSmartphone,        },
+        icon: LucideMonitorSmartphone,
+    },
     {
 
-       id:7,
+        id: 7,
         date: "Q3 2026",
         title: "Public API & Plugins",
         desc: "Extend MindScrawl with custom integrations",
 
-        icon:GitMerge,        },
+        icon: GitMerge,
+    },
     {
 
-        id:8,
+        id: 8,
         date: "2027+",
         title: "The Future",
         desc: "Collaborative workspaces, VR notes & endless innovation",
 
-        icon:Globe,        },
+        icon: Globe,
+    },
 ];
+
+export const FOOTER_ICONS: footer_icons_data[] = [
+    {
+        id: 1,
+        icon: FaTwitter,
+    }, {
+        id: 2,
+        icon: FaGithub,
+    }, {
+        id: 3,
+        icon: FaDiscord,
+    }, {
+        id: 4,
+        icon: FaYoutube,
+    }, {
+        id: 5,
+        icon: FaInstagram,
+    },
+]
+
+export const PRODUCTS: products_data[] = [
+    {
+        id: 1,
+        label: "Features"
+    }, {
+        id: 2,
+        label: "Templates"
+    }, {
+        id: 3,
+        label: "AI Tools"
+    }, {
+        id: 4,
+        label: "Pricing"
+    }, {
+        id: 5,
+        label: "Roadmap"
+    },
+    {
+        id: 6,
+        label: "Changelog"
+    },
+]
+
+export const RESOURCES: resources_data[] = [
+    {
+        id: 1,
+        label: "Documentation"
+    }, {
+        id: 2,
+        label: "Guides & Tutorials"
+    }, {
+        id: 3,
+        label: "Community Forum"
+    }, {
+        id: 4,
+        label: "Blog"
+    }, {
+        id: 5,
+        label: "API Reference"
+    },
+]
+
+export const COMPANY_FOOTER: company_data[] = [
+    {
+        id: 1,
+        label: "About Us"
+    }, {
+        id: 2,
+        label: "Careers"
+    }, {
+        id: 3,
+        label: "Press Kit"
+    }, {
+        id: 4,
+        label: "Contact"
+    }, {
+        id: 5,
+        label: "Privacy Policy"
+    },
+    {
+        id: 6,
+        label: "Terms of Service"
+    },
+]
+
+export const BRAND: brand_data[] = [
+    {
+        id: 1,
+        label: "Status"
+    },
+    {
+        id: 2,
+        label: "Security"
+    },
+    {
+        id: 3,
+        label: "Brand Guidelines"
+    },
+    {
+        id: 4,
+        label: "Accessibility"
+    }
+]

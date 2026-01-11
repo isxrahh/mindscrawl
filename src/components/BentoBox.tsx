@@ -86,7 +86,7 @@ const SkeletonOne = () => (
         initial={{ opacity: 0.8 }}
         whileHover={{ y: -6 }}
         transition={{ type: "spring", stiffness: 300 }}
-        className="flex flex-1 my-6 py-16 w-full h-1/2 dark:bg-dot-white/[0.15] bg-dot-black/[0.15] bg-gradient-to-br from-purple-600/20 via-pink-500/20 to-cyan-500/20 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
+        className="flex flex-1 my-6 py-17 w-full h-1/2 dark:bg-dot-white/[0.15] bg-dot-black/[0.15] bg-gradient-to-br from-purple-600/20 via-pink-500/20 to-cyan-500/20 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
     >
         <div className="flex flex-col items-center justify-center w-full h-full">
             <motion.div
@@ -131,7 +131,7 @@ const SkeletonTwo = () => (
 // Infinite Gradient Canvas
 const SkeletonThree = () => (
     <motion.div
-        className="flex flex-1 my-6 py-20 w-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
+        className="flex flex-1 my-6 py-25 w-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
         initial={{ backgroundPosition: "0% 50%" }}
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
@@ -216,7 +216,7 @@ const SkeletonFive = () => (
     <motion.div
         initial="initial"
         whileHover="animate"
-        className="flex flex-col justify-between py-20 px-4 my-6 bg-gradient-to-br from-white to-neutral-100 dark:from-neutral-950 dark:to-black rounded-xl border border-neutral-200 dark:border-neutral-800"
+        className="flex flex-col justify-between py-18 px-4 my-6 bg-gradient-to-br from-white to-neutral-100 dark:from-neutral-950 dark:to-black rounded-xl border border-neutral-200 dark:border-neutral-800"
     >
         <div className="flex items-center gap-5">
             <motion.div
@@ -252,7 +252,7 @@ const SkeletonFive = () => (
 
 const SkeletonOrbit = () => (
     <motion.div
-        className="w-full h-full my-2 p-12 rounded-2xl overflow-hidden border border-neutral-200/50 dark:border-neutral-800/50 bg-neutral-50/80 dark:bg-neutral-900/80 backdrop-blur-md" whileHover={{ scale: 1.02 }}
+        className="w-full h-full my-2 p-41 rounded-2xl overflow-hidden border border-neutral-200/50 dark:border-neutral-800/50 bg-neutral-50/80 dark:bg-neutral-900/80 backdrop-blur-md" whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
     >
         {/* Ambient glow */}
